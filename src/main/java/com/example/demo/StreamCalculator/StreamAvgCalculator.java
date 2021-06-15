@@ -1,9 +1,11 @@
 package com.example.demo.StreamCalculator;
 
 import Calculator.AbstractCalculator;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class StreamAvgCalculator extends AbstractCalculator {
     public StreamAvgCalculator(List<Integer> nums) {
         super(nums);
