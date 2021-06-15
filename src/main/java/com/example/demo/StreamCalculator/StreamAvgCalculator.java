@@ -9,6 +9,7 @@ import java.util.List;
 public class StreamAvgCalculator extends AbstractCalculator {
     public StreamAvgCalculator(List<Integer> nums) {
         super(nums);
+        super.setOperationName("Avg");
     }
 
     @Override

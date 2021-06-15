@@ -9,6 +9,7 @@ import java.util.List;
 public class StreamMinCalculator extends AbstractCalculator {
     public StreamMinCalculator(List<Integer> nums) {
         super(nums);
+        super.setOperationName("Min");
     }
 
     @Override

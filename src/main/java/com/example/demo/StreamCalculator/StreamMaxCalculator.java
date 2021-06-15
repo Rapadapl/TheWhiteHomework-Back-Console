@@ -9,6 +9,7 @@ import java.util.List;
 public class StreamMaxCalculator extends AbstractCalculator {
     public StreamMaxCalculator(List<Integer> nums) {
         super(nums);
+        super.setOperationName("Max");
     }
 
     @Override
