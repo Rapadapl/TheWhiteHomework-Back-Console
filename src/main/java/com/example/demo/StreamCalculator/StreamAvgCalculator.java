@@ -1,0 +1,17 @@
+package com.example.demo.StreamCalculator;
+
+import Calculator.AbstractCalculator;
+
+import java.util.List;
+
+public class StreamAvgCalculator extends AbstractCalculator {
+    public StreamAvgCalculator(List<Integer> nums) {
+        super(nums);
+    }
+
+    @Override
+    public int getResult() {
+        return (int) nums.stream().mapToInt(i -> i).average()
+                .orElseThrow(()->new NullPointerException("Num list is null"));
+    }
+}
