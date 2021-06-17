@@ -1,9 +1,12 @@
 package Utility;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@UtilityClass
 public class Utils {
 
     public static Boolean checkInput(String input) {
