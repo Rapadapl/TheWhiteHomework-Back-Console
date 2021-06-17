@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @AllArgsConstructor
@@ -19,39 +21,16 @@ public class CalculatorController {
     private final List<AbstractCalculator> calculators;
 
 
-    private static String readLine() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            return reader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
+    public Map<String, Integer> getCalculationResult (List<Integer> nums) {
 
-    public void initialize() {
-        System.out.println("Введите число:");
-        String input = readLine();
-        while (!Utils.checkInput(input)) {
-            System.out.println("Некорректный ввод, повторите снова:");
-            input = readLine();
-        }
-        List<Integer> nums = Utils.strToIntList(input);
-        getResult(nums);
-    }
+        Map<String, Integer> answer = new HashMap<>();
 
-    private void getResult(List<Integer> nums) {
         calculators.forEach(i -> {
             i.setNums(nums);
-            output(i.getResult(),i);
+            answer.put(i.getOperationName(), i.getResult());
         });
-
+        return answer;
     }
 
-    private void output(int result, AbstractCalculator calculation) {
-        System.out.printf("%s:  %d\n",
-                calculation.getOperationName(),
-                result);
-    }
 
 }
