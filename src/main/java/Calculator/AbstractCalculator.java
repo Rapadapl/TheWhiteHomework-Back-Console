@@ -1,7 +1,11 @@
 package Calculator;
 
+import lombok.Getter;
+import lombok.Setter;
 import java.util.List;
 
+@Getter
+@Setter
 public abstract class AbstractCalculator implements Operation {
    protected List<Integer> nums;
     private String operationName;
@@ -10,19 +14,4 @@ public abstract class AbstractCalculator implements Operation {
         this.nums = nums;
     }
 
-    public List<Integer> getNums() {
-        return nums;
-    }
-
-    public void setNums(List<Integer> nums) {
-        this.nums = nums;
-    }
-
-    public String getOperationName() {
-        return operationName;
-    }
-
-    public void setOperationName(String operationName) {
-        this.operationName = operationName;
-    }
 }
