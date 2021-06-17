@@ -1,16 +1,17 @@
 package com.example.demo;
 
-import com.example.demo.controller.ConsoleCalculatorController;
+import com.example.demo.controller.CalculatorController;
+import com.example.demo.runner.ConsoleRunner;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @SpringBootApplication
+@AllArgsConstructor
 public class DemoApplication {
-
 	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
