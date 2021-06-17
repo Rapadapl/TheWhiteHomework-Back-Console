@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import Calculator.AbstractCalculator;
 import Utility.Utils;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -11,21 +13,11 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 @Controller
-public class ConsoleCalculatorController {
+@AllArgsConstructor
+public class CalculatorController {
 
-    private List<AbstractCalculator> calculators;
+    private final List<AbstractCalculator> calculators;
 
-    @Autowired
-    public ConsoleCalculatorController(AbstractCalculator calculator) {
-        this.calculators.add(calculator);
-    }
-
-
-//    private AbstractCalculator calculator;
-//    @Autowired
-//    public ConsoleCalculatorController(AbstractCalculator calculator) {
-//        this.calculator = calculator;
-//    }
 
     private static String readLine() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -36,12 +28,6 @@ public class ConsoleCalculatorController {
         }
         return "";
     }
-
-//    private void getResult(List<Integer> nums){
-//        calculator.setNums(nums);
-//        int result = calculator.getResult();
-//        output(result,calculator);
-//    }
 
     public void initialize() {
         System.out.println("Введите число:");
