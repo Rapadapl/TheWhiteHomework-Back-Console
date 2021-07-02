@@ -1,9 +1,8 @@
 package com.example.demo.runner;
 
-import Calculator.AbstractCalculator;
-import Utility.Utils;
+import com.example.demo.Utility.StreamCalculatorUtils;
 import com.example.demo.controller.CalculatorController;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,39 +11,42 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ConsoleRunner implements CommandLineRunner {
+
+    private final static Logger LOGGER = Logger.getLogger(ConsoleRunner.class.getName());
 
     private final CalculatorController calculatorController;
 
     private static String readLine() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        try {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             return reader.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.INFO, e.toString());
         }
         return "";
     }
 
 
-    private void output( Map<String, Integer> result) {
+    private void output(Map<String, Integer> result) {
 
-        result.forEach((key,value)->System.out.printf("%s:  %d\n",key,value));
+        result.forEach((key, value) -> System.out.printf("%s:  %d\n", key, value));
 
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         System.out.println("Введите число:");
         String input = readLine();
-        while (!Utils.checkInput(input)) {
+        while (!StreamCalculatorUtils.checkInput(input)) {
             System.out.println("Некорректный ввод, повторите снова:");
             input = readLine();
         }
-        List<Integer> nums = Utils.strToIntList(input);
+        List<Integer> nums = StreamCalculatorUtils.strToIntList(input);
 
         Map<String, Integer> result = calculatorController.getCalculationResult(nums);
         output(result);

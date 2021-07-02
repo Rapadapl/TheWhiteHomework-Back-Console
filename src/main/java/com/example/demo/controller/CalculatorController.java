@@ -1,33 +1,25 @@
 package com.example.demo.controller;
 
-import Calculator.AbstractCalculator;
-import Utility.Utils;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.calculator.MathOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CalculatorController {
 
-    private final List<AbstractCalculator> calculators;
+    private final List<MathOperation> calculators;
 
-
-    public Map<String, Integer> getCalculationResult (List<Integer> nums) {
+    public Map<String, Integer> getCalculationResult(List<Integer> nums) {
 
         Map<String, Integer> answer = new HashMap<>();
 
         calculators.forEach(i -> {
-            i.setNums(nums);
-            answer.put(i.getOperationName(), i.getResult());
+            answer.put(i.getOperationName(), i.getResult(nums));
         });
         return answer;
     }
