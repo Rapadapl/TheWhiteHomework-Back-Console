@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.calculator.MathOperation;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CalculatorController {
 
     private final List<MathOperation> calculators;

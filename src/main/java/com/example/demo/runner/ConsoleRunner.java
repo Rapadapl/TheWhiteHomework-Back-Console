@@ -3,6 +3,7 @@ package com.example.demo.runner;
 import com.example.demo.Utility.StreamCalculatorUtils;
 import com.example.demo.controller.CalculatorController;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ConsoleRunner implements CommandLineRunner {
 
     private final CalculatorController calculatorController;
