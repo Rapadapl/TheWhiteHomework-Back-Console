@@ -2,7 +2,6 @@ package com.example.demo.runner;
 
 import com.example.demo.Utility.StreamCalculatorUtils;
 import com.example.demo.controller.CalculatorController;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -40,7 +39,7 @@ public class ConsoleRunner implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args){
+    public void run(String... args) {
         System.out.println("Введите число:");
         String input = readLine();
         while (!StreamCalculatorUtils.checkInput(input)) {

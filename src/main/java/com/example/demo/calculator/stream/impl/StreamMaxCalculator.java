@@ -3,7 +3,6 @@ package com.example.demo.calculator.stream.impl;
 import com.example.demo.calculator.MathOperation;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
