@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@ConditionalOnProperty(name = "calculator.max", havingValue  = "true")
+@ConditionalOnProperty(name = "calculator.max", havingValue = "true")
 public class StreamMaxCalculator extends AbstractCalculator {
     public StreamMaxCalculator(List<Integer> nums) {
         super(nums);
@@ -17,6 +17,6 @@ public class StreamMaxCalculator extends AbstractCalculator {
     @Override
     public int getResult() {
         return nums.stream().max(Integer::compare)
-                .orElseThrow(()->new NullPointerException("Num list is null"));
+                .orElseThrow(() -> new NullPointerException("Num list is null"));
     }
 }

@@ -1,6 +1,5 @@
 package com.example.demo.runner;
 
-import Calculator.AbstractCalculator;
 import Utility.Utils;
 import com.example.demo.controller.CalculatorController;
 import lombok.AllArgsConstructor;
@@ -30,9 +29,9 @@ public class ConsoleRunner implements CommandLineRunner {
     }
 
 
-    private void output( Map<String, Integer> result) {
+    private void output(Map<String, Integer> result) {
 
-        result.forEach((key,value)->System.out.printf("%s:  %d\n",key,value));
+        result.forEach((key, value) -> System.out.printf("%s:  %d\n", key, value));
 
     }
 
