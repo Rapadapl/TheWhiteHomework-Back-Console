@@ -1,6 +1,7 @@
 package com.example.demo.runner;
 
 import com.example.demo.Utility.StreamCalculatorUtils;
+import com.example.demo.checker.CheckerException;
 import com.example.demo.controller.CalculatorController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -48,7 +49,11 @@ public class ConsoleRunner implements CommandLineRunner {
         }
         List<Integer> nums = StreamCalculatorUtils.strToIntList(input);
 
-        Map<String, Integer> result = calculatorController.getCalculationResult(nums);
-        output(result);
+        try {
+            Map<String, Integer> result = calculatorController.getCalculationResult(nums);
+            output(result);
+        }catch (CheckerException e) {
+            System.out.print("WARNING " + e.getMessage());
+        }
     }
 }
