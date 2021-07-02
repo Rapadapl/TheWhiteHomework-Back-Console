@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @UtilityClass
-public class Utils {
+public class StreamCalculatorUtils {
 
     public static Boolean checkInput(String input) {
         if (input != null)

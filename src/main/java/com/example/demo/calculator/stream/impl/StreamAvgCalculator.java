@@ -1,4 +1,4 @@
-package com.example.demo.calculator.stream.iml;
+package com.example.demo.calculator.stream.impl;
 
 import com.example.demo.calculator.AbstractCalculator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
