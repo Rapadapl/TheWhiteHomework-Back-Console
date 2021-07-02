@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import Calculator.AbstractCalculator;
+import com.example.demo.calculator.AbstractCalculator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 

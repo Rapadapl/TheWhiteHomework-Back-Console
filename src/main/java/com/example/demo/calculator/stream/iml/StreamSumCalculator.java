@@ -1,6 +1,6 @@
-package com.example.demo.StreamCalculator;
+package com.example.demo.calculator.stream.iml;
 
-import Calculator.AbstractCalculator;
+import com.example.demo.calculator.AbstractCalculator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 

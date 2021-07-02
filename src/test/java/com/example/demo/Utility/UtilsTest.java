@@ -1,4 +1,4 @@
-package Utility;
+package com.example.demo.Utility;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

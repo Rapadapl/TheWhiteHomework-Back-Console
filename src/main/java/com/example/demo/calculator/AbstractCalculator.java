@@ -1,4 +1,4 @@
-package Calculator;
+package com.example.demo.calculator;
 
 import lombok.Getter;
 import lombok.Setter;

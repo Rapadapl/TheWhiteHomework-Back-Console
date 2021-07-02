@@ -1,6 +1,6 @@
 package com.example.demo.runner;
 
-import Utility.Utils;
+import com.example.demo.Utility.Utils;
 import com.example.demo.controller.CalculatorController;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
