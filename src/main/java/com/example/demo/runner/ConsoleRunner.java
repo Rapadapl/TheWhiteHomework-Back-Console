@@ -12,19 +12,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Component
 @RequiredArgsConstructor
 public class ConsoleRunner implements CommandLineRunner {
 
+    private final static Logger LOGGER = Logger.getLogger(ConsoleRunner.class.getName());
+
     private final CalculatorController calculatorController;
 
     private static String readLine() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        try {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             return reader.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.INFO, e.toString());
         }
         return "";
     }
@@ -37,7 +40,7 @@ public class ConsoleRunner implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args){
         System.out.println("Введите число:");
         String input = readLine();
         while (!StreamCalculatorUtils.checkInput(input)) {
