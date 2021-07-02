@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.calculator.AbstractCalculator;
+import com.example.demo.calculator.MathOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 
@@ -12,16 +12,14 @@ import java.util.Map;
 @AllArgsConstructor
 public class CalculatorController {
 
-    private final List<AbstractCalculator> calculators;
-
+    private final List<MathOperation> calculators;
 
     public Map<String, Integer> getCalculationResult(List<Integer> nums) {
 
         Map<String, Integer> answer = new HashMap<>();
 
         calculators.forEach(i -> {
-            i.setNums(nums);
-            answer.put(i.getOperationName(), i.getResult());
+            answer.put(i.getOperationName(), i.getResult(nums));
         });
         return answer;
     }

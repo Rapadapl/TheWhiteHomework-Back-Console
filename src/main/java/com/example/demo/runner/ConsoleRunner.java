@@ -1,6 +1,6 @@
 package com.example.demo.runner;
 
-import com.example.demo.Utility.Utils;
+import com.example.demo.Utility.StreamCalculatorUtils;
 import com.example.demo.controller.CalculatorController;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -39,11 +39,11 @@ public class ConsoleRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("Введите число:");
         String input = readLine();
-        while (!Utils.checkInput(input)) {
+        while (!StreamCalculatorUtils.checkInput(input)) {
             System.out.println("Некорректный ввод, повторите снова:");
             input = readLine();
         }
-        List<Integer> nums = Utils.strToIntList(input);
+        List<Integer> nums = StreamCalculatorUtils.strToIntList(input);
 
         Map<String, Integer> result = calculatorController.getCalculationResult(nums);
         output(result);
