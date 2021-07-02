@@ -1,6 +1,7 @@
 package com.example.demo.Utility;
 
 import com.example.demo.runner.ConsoleRunner;
+import lombok.experimental.UtilityClass;
 
 import java.io.FileInputStream;
 import java.net.URL;
@@ -8,6 +9,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@UtilityClass
 public class PropertiesExtractor {
 
     private final static Logger LOGGER = Logger.getLogger(ConsoleRunner.class.getName());
