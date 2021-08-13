@@ -15,7 +15,7 @@ public class StreamAvgCalculator implements MathOperation {
     @Override
     public int getResult(List<Integer> nums) {
         return (int) nums.stream().mapToInt(i -> i).average()
-                .orElseThrow(() -> new NullPointerException("Num list is null"));
+                         .orElseThrow(() -> new NullPointerException("Num list is null"));
     }
 
     @Override

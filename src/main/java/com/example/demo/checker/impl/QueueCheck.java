@@ -1,8 +1,8 @@
 package com.example.demo.checker.impl;
 
-import com.example.demo.Utility.PropertiesExtractor;
 import com.example.demo.checker.CheckerException;
 import com.example.demo.checker.NumbersChecker;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
@@ -14,16 +14,17 @@ import java.util.stream.Collectors;
 
 public class QueueCheck implements NumbersChecker {
 
-    private static final String QUEUE = PropertiesExtractor.getProperty("checkers.queue");
+    @Value("${checkers.queue}")
+    private String checkersQueue;
 
     @Override
     public void checkNumbers(List<Integer> nums) {
 
         String numberString = nums.stream().map(String::valueOf)
-                .collect(Collectors.joining(""));
+                                  .collect(Collectors.joining(""));
 
-        if (numberString.contains(QUEUE))
-            throw new CheckerException(String.format("Input numbers contains %s", QUEUE));
+        if (numberString.contains(checkersQueue))
+            throw new CheckerException(String.format("Input numbers contains %s", checkersQueue));
     }
 }
 
