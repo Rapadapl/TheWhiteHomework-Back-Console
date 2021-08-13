@@ -29,11 +29,63 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 @EnablePostgresIntegrationTest
-class LoggerCalculationControllerTest   {
+class LoggerCalculationControllerTest {
 
     @Autowired
     private WebTestClient webTestClient;
 
+    static Stream<Arguments> dataForSearchFunctionalityTest() {
+
+        LinkedMultiValueMap<String, String> searchByDate = new LinkedMultiValueMap<String, String>() {{
+            add("fromDate", "2021-08-12T18:39:32.636");
+        }};
+
+        LinkedMultiValueMap<String, String> searchByResultText = new LinkedMultiValueMap<String, String>() {{
+            add("result", "Sum=20");
+        }};
+
+        LinkedMultiValueMap<String, String> searchByNumber = new LinkedMultiValueMap<String, String>() {{
+            add("number", "1234");
+        }};
+
+
+        LinkedMultiValueMap<String, String> searchByResultTextAndDate = new LinkedMultiValueMap<String, String>() {{
+            add("result", "Sum=10");
+            add("toDate", "2021-08-12T18:39:33.636");
+        }};
+
+        MathExpressions firstExpectedResult = MathExpressions.builder()
+                                                             .number(1234)
+                                                             .result("{Avg=2, Min=1, Max=4, Sum=10}")
+                                                             .id(UUID.fromString("01cc975d-7614-4610-800b-1fc8781e0a58"))
+                                                             .creationDate(LocalDateTime.parse("2021-08-12T18:39:32.636"))
+                                                             .build();
+
+        MathExpressions secondExpectedResult = MathExpressions.builder()
+                                                              .number(23456)
+                                                              .result("{Avg=4, Min=2, Max=6, Sum=20}")
+                                                              .id(UUID.fromString("073f8b30-9e79-4c81-b686-2dfe03455fde"))
+                                                              .creationDate(LocalDateTime.parse("2021-08-06T19:59:12.393"))
+                                                              .build();
+
+        return Stream.of(
+                arguments(
+                        searchByDate,
+                        firstExpectedResult),
+
+                arguments(
+                        searchByResultText,
+                        secondExpectedResult),
+
+                arguments(
+                        searchByNumber,
+                        firstExpectedResult),
+
+                arguments(
+                        searchByResultTextAndDate,
+                        firstExpectedResult)
+                        );
+    }
 
     @Test
     @DataSet(cleanAfter = true, cleanBefore = true, value = "mathExpression_4items.json")
@@ -80,7 +132,6 @@ class LoggerCalculationControllerTest   {
         assertTrue(actual.isEmpty());
     }
 
-
     @ParameterizedTest
     @MethodSource("dataForSearchFunctionalityTest")
     @DataSet(cleanAfter = true, cleanBefore = true, value = "mathExpression_4items.json")
@@ -107,58 +158,5 @@ class LoggerCalculationControllerTest   {
         MathExpressions actual = listOfActual.get(0);
 
         assertThat(actual).usingRecursiveComparison().withStrictTypeChecking().isEqualTo(expected);
-    }
-
-    static Stream<Arguments> dataForSearchFunctionalityTest() {
-
-        LinkedMultiValueMap<String, String> searchByDate = new LinkedMultiValueMap<String, String>() {{
-            add("fromDate", "2021-08-12T18:39:32.636");
-        }};
-
-        LinkedMultiValueMap<String, String> searchByResultText = new LinkedMultiValueMap<String, String>() {{
-            add("result", "Sum=20");
-        }};
-
-        LinkedMultiValueMap<String, String> searchByNumber = new LinkedMultiValueMap<String, String>() {{
-            add("number", "1234");
-        }};
-
-
-        LinkedMultiValueMap<String, String> searchByResultTextAndDate = new LinkedMultiValueMap<String, String>() {{
-            add("result", "Sum=10");
-            add("toDate", "2021-08-12T18:39:33.636");
-        }};
-
-        MathExpressions firstExpectedResult = MathExpressions.builder()
-                                                     .number(1234)
-                                                     .result("{Avg=2, Min=1, Max=4, Sum=10}")
-                                                     .id(UUID.fromString("01cc975d-7614-4610-800b-1fc8781e0a58"))
-                                                     .creationDate(LocalDateTime.parse("2021-08-12T18:39:32.636"))
-                                                     .build();
-
-        MathExpressions secondExpectedResult = MathExpressions.builder()
-                                                      .number(23456)
-                                                      .result("{Avg=4, Min=2, Max=6, Sum=20}")
-                                                      .id(UUID.fromString("073f8b30-9e79-4c81-b686-2dfe03455fde"))
-                                                      .creationDate(LocalDateTime.parse("2021-08-06T19:59:12.393"))
-                                                      .build();
-
-        return Stream.of(
-                arguments(
-                        searchByDate,
-                        firstExpectedResult),
-
-                arguments(
-                        searchByResultText,
-                        secondExpectedResult),
-
-                arguments(
-                        searchByNumber,
-                        firstExpectedResult),
-
-                arguments(
-                        searchByResultTextAndDate,
-                        firstExpectedResult)
-                        );
     }
 }

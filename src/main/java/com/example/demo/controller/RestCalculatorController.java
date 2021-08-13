@@ -44,9 +44,9 @@ public class RestCalculatorController {
         List<Integer> nums = stringToListAction.strToList(strNums);
         Map<String, Integer> answer = new HashMap<>();
 
-        try{
+        try {
             Integer.parseInt(strNums);
-        }catch (Exception e){
+        } catch (Exception e) {
             log.info("Big number");
             throw new CheckerException("Too big number for operating");
         }

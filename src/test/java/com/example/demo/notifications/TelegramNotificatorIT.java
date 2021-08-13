@@ -22,14 +22,12 @@ import static org.mockito.Mockito.verify;
 @AutoConfigureWebTestClient
 @EnablePostgresIntegrationTest
 public class TelegramNotificatorIT {
-    @Autowired
-    private WebTestClient webTestClient;
-
-    @MockBean
-    private TelegramNotificationService telegramServiceMock;
-
     @Captor
     ArgumentCaptor<Notification> messageCaptor;
+    @Autowired
+    private WebTestClient webTestClient;
+    @MockBean
+    private TelegramNotificationService telegramServiceMock;
 
     @Test
     @DataSet(cleanAfter = true)

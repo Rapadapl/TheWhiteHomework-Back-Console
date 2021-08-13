@@ -3,7 +3,6 @@ package com.example.demo.notifications.service;
 
 import com.example.demo.notifications.dto.Notification;
 import com.example.demo.notifications.dto.Summary;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,9 @@ public class TelegramNotificationService implements NotificationService {
 
     private final WebClient webClient;
     @Value("${telegram.bot.token}")
-    private  String botToken;
+    private String botToken;
     @Value("${telegram.chat.id}")
-    private  String chatId;
+    private String chatId;
 
     @Autowired
     public TelegramNotificationService(WebClient webClient,
@@ -83,7 +82,7 @@ public class TelegramNotificationService implements NotificationService {
                  .uri(url.toUri())
                  .retrieve()
                  .bodyToMono(String.class)
-        //.doOnError(error -> log.error("An error has occurred {}", error.getMessage()))
+                 //.doOnError(error -> log.error("An error has occurred {}", error.getMessage()))
                  .block()
         ;
         log.info("bot message send");

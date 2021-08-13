@@ -28,13 +28,11 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class TelegramNotificationServiceTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private WebClient webClient;
-
     @Captor
     ArgumentCaptor<URI> uriCaptor;
-
     TelegramNotificationService telegramNotificationService;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private WebClient webClient;
 
     @BeforeEach
     void setup() {

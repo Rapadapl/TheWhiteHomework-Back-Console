@@ -18,7 +18,8 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 
@@ -29,55 +30,6 @@ class RestCalculatorControllerTest {
 
     @Autowired
     private WebTestClient webTestClient;
-
-    @Test
-    @DataSet(cleanAfter = true)
-    @ExpectedDataSet(value = "mathExpression_created.json")
-    void successfullyReturnsStats() {
-        //Act
-        String actual = webTestClient
-                .post()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/calculator/all")
-                        .queryParam("number", "123")
-                        .build())
-                .exchange()
-
-                //Assert
-                .expectStatus().isOk()
-                .expectBody(String.class)
-                .returnResult().getResponseBody();
-
-        String expected = "{\"Avg\":2,\"Min\":1,\"Max\":3,\"Sum\":6}";
-
-        assertEquals(expected, actual);
-    }
-
-
-    @ParameterizedTest
-    @MethodSource("dataForExceptionTest")
-    void exceptionTest(String path,
-                       String paramName,
-                       Optional<String> paramVal,
-                       HttpStatus status,
-                       String expectedMessage) {
-        //Act
-        ErrorDto actual = webTestClient
-                .post()
-                .uri(uriBuilder -> uriBuilder
-                        .path(path)
-                        .queryParamIfPresent(paramName, paramVal)
-                        .build())
-                .exchange()
-
-                //Assert
-                .expectStatus().isEqualTo(status)
-                .expectBody(ErrorDto.class)
-                .returnResult().getResponseBody();
-
-        assertNotNull(actual);
-        assertEquals(actual.getMessage(), expectedMessage);
-    }
 
     static Stream<Arguments> dataForExceptionTest() {
         return Stream.of(
@@ -105,5 +57,53 @@ class RestCalculatorControllerTest {
                           HttpStatus.BAD_REQUEST,
                           "Input numbers have wrong format")
                         );
+    }
+
+    @Test
+    @DataSet(cleanAfter = true)
+    @ExpectedDataSet(value = "mathExpression_created.json")
+    void successfullyReturnsStats() {
+        //Act
+        String actual = webTestClient
+                .post()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/calculator/all")
+                        .queryParam("number", "123")
+                        .build())
+                .exchange()
+
+                //Assert
+                .expectStatus().isOk()
+                .expectBody(String.class)
+                .returnResult().getResponseBody();
+
+        String expected = "{\"Avg\":2,\"Min\":1,\"Max\":3,\"Sum\":6}";
+
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @MethodSource("dataForExceptionTest")
+    void exceptionTest(String path,
+                       String paramName,
+                       Optional<String> paramVal,
+                       HttpStatus status,
+                       String expectedMessage) {
+        //Act
+        ErrorDto actual = webTestClient
+                .post()
+                .uri(uriBuilder -> uriBuilder
+                        .path(path)
+                        .queryParamIfPresent(paramName, paramVal)
+                        .build())
+                .exchange()
+
+                //Assert
+                .expectStatus().isEqualTo(status)
+                .expectBody(ErrorDto.class)
+                .returnResult().getResponseBody();
+
+        assertNotNull(actual);
+        assertEquals(actual.getMessage(), expectedMessage);
     }
 }
