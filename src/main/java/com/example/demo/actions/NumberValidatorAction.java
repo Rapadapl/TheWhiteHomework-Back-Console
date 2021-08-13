@@ -1,7 +1,6 @@
 package com.example.demo.actions;
 
-import com.example.demo.Utility.StreamCalculatorUtils;
-import com.example.demo.controller.dto.NewCalculationDto;
+import com.example.demo.utility.StreamCalculatorUtils;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
