@@ -1,0 +1,8 @@
+{
+  "math_expressions": [
+    {
+      "number": 123,
+      "result": "{Avg=2, Min=1, Max=3, Sum=6}"
+    }
+  ]
+}

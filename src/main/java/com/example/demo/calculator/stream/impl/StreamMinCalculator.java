@@ -15,7 +15,7 @@ public class StreamMinCalculator implements MathOperation {
     @Override
     public int getResult(List<Integer> nums) {
         return nums.stream().min(Integer::compare)
-                .orElseThrow(() -> new NullPointerException("Num list is null"));
+                   .orElseThrow(() -> new NullPointerException("Num list is null"));
     }
 
     @Override

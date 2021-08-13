@@ -15,7 +15,7 @@ public class StreamMaxCalculator implements MathOperation {
 
     public int getResult(List<Integer> nums) {
         return nums.stream().max(Integer::compare)
-                .orElseThrow(() -> new NullPointerException("Num list is null"));
+                   .orElseThrow(() -> new NullPointerException("Num list is null"));
     }
 
     @Override
