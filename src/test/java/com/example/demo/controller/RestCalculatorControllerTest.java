@@ -55,7 +55,7 @@ class RestCalculatorControllerTest {
                           "number",
                           Optional.of(""),
                           HttpStatus.BAD_REQUEST,
-                          "Input numbers have wrong format")
+                          "Argument is null or has illegal type")
                         );
     }
 

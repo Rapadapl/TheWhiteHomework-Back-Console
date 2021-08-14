@@ -1,5 +1,6 @@
 package com.example.demo.utility;
 
+import com.example.demo.checker.CheckerException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -47,7 +48,7 @@ class StreamCalculatorUtilsTest {
     @Test
     public void invalidParse() {
         String input = "121dfg4";
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class,
+        Exception exception = Assertions.assertThrows(CheckerException.class,
                                                       () -> StreamCalculatorUtils.strToIntList(input));
         String expectedMessage = "Argument is null or has illegal type";
         String actualMessage = exception.getMessage();
@@ -57,7 +58,7 @@ class StreamCalculatorUtilsTest {
     @Test
     public void emptyParse() {
         String input = "";
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class,
+        Exception exception = Assertions.assertThrows(CheckerException.class,
                                                       () -> StreamCalculatorUtils.strToIntList(input));
         String expectedMessage = "Argument is null or has illegal type";
         String actualMessage = exception.getMessage();
@@ -67,7 +68,7 @@ class StreamCalculatorUtilsTest {
     @Test
     public void nullParse() {
         String input = null;
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class,
+        Exception exception = Assertions.assertThrows(CheckerException.class,
                                                       () -> StreamCalculatorUtils.strToIntList(input));
         String expectedMessage = "Argument is null or has illegal type";
         String actualMessage = exception.getMessage();

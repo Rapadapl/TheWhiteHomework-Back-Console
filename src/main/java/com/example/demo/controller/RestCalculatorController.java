@@ -4,9 +4,8 @@ import com.example.demo.actions.NumberValidatorAction;
 import com.example.demo.actions.PerformCalculationsAction;
 import com.example.demo.actions.StringToListAction;
 import com.example.demo.calculator.MathOperation;
-import com.example.demo.checker.CheckerException;
-import com.example.demo.notifications.annotation.Notificator;
-import com.example.demo.service.MathExpressionServiceImpl;
+import com.example.demo.notifications.annotation.Notify;
+import com.example.demo.service.MathExpressionService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,28 +28,17 @@ public class RestCalculatorController {
     private final PerformCalculationsAction performCalculationsAction;
     private final NumberValidatorAction numberValidatorAction;
     private final StringToListAction stringToListAction;
-    private final MathExpressionServiceImpl expressions;
+    private final MathExpressionService expressions;
 
-
-    @Notificator
+    @Notify
     @PostMapping("all")
     public Map<String, Integer> getCalculationResult(
-            @RequestParam(name = "number", required = true) String strNums) {
+            @RequestParam(name = "number") String strNums) {
 
-        if (!numberValidatorAction.validate(strNums))
-            throw new CheckerException("Input numbers have wrong format");
-
+        numberValidatorAction.validate(strNums);
 
         List<Integer> nums = stringToListAction.strToList(strNums);
         Map<String, Integer> answer = new HashMap<>();
-
-        try {
-            Integer.parseInt(strNums);
-        } catch (Exception e) {
-            log.info("Big number");
-            throw new CheckerException("Too big number for operating");
-        }
-
 
         calculators.forEach(i -> {
             answer.put(i.getOperationName(), i.getResult(nums));
