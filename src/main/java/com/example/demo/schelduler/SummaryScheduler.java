@@ -32,7 +32,7 @@ public class SummaryScheduler {
         Summary message = Summary.builder()
                                  .fromDateTime(todayDateTime)
                                  .toDateTime(yesterdayDateTime)
-                                 .Count(expressionService.getBetweenDates(todayDateTime, yesterdayDateTime).size())
+                                 .count(expressionService.getBetweenDates(todayDateTime, yesterdayDateTime).size())
                                  .build();
 
         notificationServiceList.forEach(service -> service.summarize(message));

@@ -1,7 +1,7 @@
 package com.example.demo.notifications.aspect;
 
 
-import com.example.demo.notifications.annotation.Notificator;
+import com.example.demo.notifications.annotation.Notify;
 import com.example.demo.notifications.dto.Notification;
 import com.example.demo.notifications.service.NotificationService;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +19,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class NotificationAspect {
-
-
     private final List<NotificationService> notificationServices;
 
     @Around(value = "@annotation(notificatorBot)")
-    public Object NotificationAboutRequest(ProceedingJoinPoint joinPoint, Notificator notificatorBot) throws Throwable {
+    public Object notificationAboutRequest(ProceedingJoinPoint joinPoint, Notify notificatorBot) throws Throwable {
 
         LocalDateTime callTime = LocalDateTime.now();
 

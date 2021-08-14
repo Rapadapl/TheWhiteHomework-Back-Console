@@ -5,7 +5,6 @@ import com.example.demo.notifications.dto.Notification;
 import com.example.demo.notifications.dto.Summary;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -20,19 +19,9 @@ public class TelegramNotificationService implements NotificationService {
 
     private final WebClient webClient;
     @Value("${telegram.bot.token}")
-    private String botToken;
+    private final String botToken;
     @Value("${telegram.chat.id}")
-    private String chatId;
-
-    @Autowired
-    public TelegramNotificationService(WebClient webClient,
-                                       @Autowired(required = false) String botToken,
-                                       @Autowired(required = false) String chatId) {
-        this.webClient = webClient;
-        this.botToken = botToken;
-        this.chatId = chatId;
-    }
-
+    private final String chatId;
 
     @Override
     public void notify(Notification message) {
@@ -82,9 +71,7 @@ public class TelegramNotificationService implements NotificationService {
                  .uri(url.toUri())
                  .retrieve()
                  .bodyToMono(String.class)
-                 //.doOnError(error -> log.error("An error has occurred {}", error.getMessage()))
-                 .block()
-        ;
+                 .block();
         log.info("bot message send");
     }
 

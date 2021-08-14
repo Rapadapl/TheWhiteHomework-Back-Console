@@ -10,5 +10,5 @@ import java.time.LocalDateTime;
 public class Summary {
     LocalDateTime fromDateTime;
     LocalDateTime toDateTime;
-    int Count = 0;
+    int count;
 }

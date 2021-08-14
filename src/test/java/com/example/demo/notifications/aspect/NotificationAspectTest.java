@@ -1,6 +1,6 @@
 package com.example.demo.notifications.aspect;
 
-import com.example.demo.notifications.annotation.Notificator;
+import com.example.demo.notifications.annotation.Notify;
 import com.example.demo.notifications.dto.Notification;
 import com.example.demo.notifications.service.TelegramNotificationService;
 import com.google.common.collect.Lists;
@@ -30,7 +30,7 @@ class NotificationAspectTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private ProceedingJoinPoint joinPoint;
     @Mock
-    private Notificator notificator;
+    private Notify notificator;
 
     @Test
     void NotificationAboutRequest() throws Throwable {
@@ -40,7 +40,7 @@ class NotificationAspectTest {
         when(joinPoint.getSignature().getName()).thenReturn("getCalculationResult");
 
         //Act
-        aspect.NotificationAboutRequest(joinPoint, notificator);
+        aspect.notificationAboutRequest(joinPoint, notificator);
 
         //Assert
         verify(telegramNotificationService).notify(messageCaptor.capture());
@@ -59,7 +59,7 @@ class NotificationAspectTest {
 
 
         //Act & assert
-        assertThrows(IllegalArgumentException.class, () -> aspect.NotificationAboutRequest(joinPoint, notificator));
+        assertThrows(IllegalArgumentException.class, () -> aspect.notificationAboutRequest(joinPoint, notificator));
         verify(telegramNotificationService)
                 .notify(messageCaptor.capture());
 
