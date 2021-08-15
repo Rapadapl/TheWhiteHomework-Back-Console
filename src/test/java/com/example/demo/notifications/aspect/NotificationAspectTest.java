@@ -33,7 +33,7 @@ class NotificationAspectTest {
     private Notify notificator;
 
     @Test
-    void NotificationAboutRequest() throws Throwable {
+    void notificationAboutRequest() throws Throwable {
         //Arrange
         NotificationAspect aspect = new NotificationAspect(Lists.newArrayList(telegramNotificationService));
 
@@ -50,7 +50,7 @@ class NotificationAspectTest {
     }
 
     @Test
-    void NotificationWithException(SoftAssertions softly) throws Throwable {
+    void notificationWithException(SoftAssertions softly) throws Throwable {
         //Arrange
         NotificationAspect aspect = new NotificationAspect(Lists.newArrayList(telegramNotificationService));
 
