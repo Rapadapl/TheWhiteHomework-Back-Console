@@ -29,7 +29,7 @@ public class MathExpressionServiceImpl implements MathExpressionService {
 
     @Transactional
     @Override
-    public MathExpressions create(int number, String result) {
+    public MathExpressions create(String number, String result) {
         MathExpressions entity = new MathExpressions();
         entity.setNumber(number);
         entity.setResult(result);

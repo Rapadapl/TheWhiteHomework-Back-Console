@@ -46,7 +46,7 @@ public class RestCalculatorController {
 
         performCalculationsAction.execute(nums);
 
-        expressions.create(Integer.parseInt(strNums), answer.toString());
+        expressions.create(strNums, answer.toString());
         return answer;
     }
 

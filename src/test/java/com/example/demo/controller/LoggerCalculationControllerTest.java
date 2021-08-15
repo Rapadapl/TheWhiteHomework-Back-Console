@@ -55,14 +55,14 @@ class LoggerCalculationControllerTest {
         }};
 
         MathExpressions firstExpectedResult = MathExpressions.builder()
-                                                             .number(1234)
+                                                             .number("1234")
                                                              .result("{Avg=2, Min=1, Max=4, Sum=10}")
                                                              .id(UUID.fromString("01cc975d-7614-4610-800b-1fc8781e0a58"))
                                                              .creationDate(LocalDateTime.parse("2021-08-12T18:39:32.636"))
                                                              .build();
 
         MathExpressions secondExpectedResult = MathExpressions.builder()
-                                                              .number(23456)
+                                                              .number("23456")
                                                               .result("{Avg=4, Min=2, Max=6, Sum=20}")
                                                               .id(UUID.fromString("073f8b30-9e79-4c81-b686-2dfe03455fde"))
                                                               .creationDate(LocalDateTime.parse("2021-08-06T19:59:12.393"))

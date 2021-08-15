@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public interface MathExpressionService {
-    MathExpressions create(int number, String result);
+    MathExpressions create(String number, String result);
 
     List<MathExpressions> getFiltered(MathExpressionFindArgs args, Pageable pageable);
 

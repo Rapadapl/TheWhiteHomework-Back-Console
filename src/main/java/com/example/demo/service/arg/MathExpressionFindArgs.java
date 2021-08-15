@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class MathExpressionFindArgs {
 
 
-    Integer number;
+    String number;
     String result;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     LocalDateTime fromDate;

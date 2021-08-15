@@ -31,6 +31,7 @@ class TelegramNotificationServiceTest {
     @Captor
     ArgumentCaptor<URI> uriCaptor;
     TelegramNotificationService telegramNotificationService;
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private WebClient webClient;
 
@@ -50,15 +51,11 @@ class TelegramNotificationServiceTest {
                                               .exception("")
                                               .build();
         //Act
-        clearInvocations(webClient);
-
         telegramNotificationService.notify(messageArg);
 
         //Assert
         String expectedString = "https://api.telegram.org/bot666/sendMessage?chat_id=42&text=Service%20was%20called" +
                                 "%20at:2021-09-06T19:59:21.619%0AExecuted%20method:calledMethod%0AOperation%20successful";
-
-        //UriComponents expectedUri = UriComponentsBuilder.fromUriString(expectedString).build();
         verify(webClient.post()).uri(uriCaptor.capture());
         String actualString = uriCaptor.getValue().toString();
         Assertions.assertEquals(expectedString, actualString);
@@ -77,9 +74,9 @@ class TelegramNotificationServiceTest {
 
         List<MathExpressions> mathExpressions = new ArrayList<>();
 
-        mathExpressions.add(MathExpressions.builder().number(111).build());
-        mathExpressions.add(MathExpressions.builder().number(222).build());
-        mathExpressions.add(MathExpressions.builder().number(333).build());
+        mathExpressions.add(MathExpressions.builder().number("111").build());
+        mathExpressions.add(MathExpressions.builder().number("222").build());
+        mathExpressions.add(MathExpressions.builder().number("333").build());
 
         when(summary.getCount()).thenReturn(mathExpressions.size());
 
