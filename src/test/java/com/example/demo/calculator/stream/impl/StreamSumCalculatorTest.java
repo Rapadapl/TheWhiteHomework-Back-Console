@@ -1,15 +1,15 @@
 package com.example.demo.calculator.stream.impl;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StreamSumCalculatorTest {
     private final StreamSumCalculator sum = new StreamSumCalculator();
+
     @Test
     void calculatorSum() {
         //Act

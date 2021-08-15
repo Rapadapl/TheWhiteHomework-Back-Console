@@ -1,8 +1,6 @@
 package com.example.demo.runner;
 
-import com.example.demo.checker.CheckerException;
 import com.example.demo.controller.CalculatorController;
-import com.example.demo.utility.StreamCalculatorUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;

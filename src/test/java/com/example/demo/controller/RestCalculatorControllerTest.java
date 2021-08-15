@@ -9,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,8 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 
@@ -27,8 +29,37 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 @EnablePostgresIntegrationTest
 class RestCalculatorControllerTest {
 
+
     @Autowired
     private WebTestClient webTestClient;
+
+    static Stream<Arguments> dataForExceptionTest() {
+        return Stream.of(
+                arguments("/calculator/all",
+                          "number",
+                          Optional.of("123666456"),
+                          HttpStatus.BAD_REQUEST,
+                          "Input numbers contains 666"),
+
+                arguments("/calculator/all",
+                          "number",
+                          Optional.of("99996"),
+                          HttpStatus.BAD_REQUEST,
+                          "Sum is equal to 42"),
+
+                arguments("/calculator/all",
+                          "number",
+                          Optional.of(String.join("", Collections.nCopies(101, "9"))),
+                          HttpStatus.BAD_REQUEST,
+                          "Length is higher than 100"),
+
+                arguments("/calculator/all",
+                          "number",
+                          Optional.of(""),
+                          HttpStatus.BAD_REQUEST,
+                          "Argument is null or has illegal type")
+                        );
+    }
 
     @Test
     @DataSet(cleanAfter = true)
@@ -53,7 +84,6 @@ class RestCalculatorControllerTest {
         assertEquals(expected, actual);
     }
 
-
     @ParameterizedTest
     @MethodSource("dataForExceptionTest")
     void exceptionTest(String path,
@@ -77,33 +107,5 @@ class RestCalculatorControllerTest {
 
         assertNotNull(actual);
         assertEquals(actual.getMessage(), expectedMessage);
-    }
-
-    static Stream<Arguments> dataForExceptionTest() {
-        return Stream.of(
-                arguments("/calculator/all",
-                          "number",
-                          Optional.of("123666456"),
-                          HttpStatus.BAD_REQUEST,
-                          "Input numbers contains 666"),
-
-                arguments("/calculator/all",
-                          "number",
-                          Optional.of("99996"),
-                          HttpStatus.BAD_REQUEST,
-                          "Sum is equal to 42"),
-
-                arguments("/calculator/all",
-                          "number",
-                          Optional.of(String.join("", Collections.nCopies(10, "9"))),
-                          HttpStatus.BAD_REQUEST,
-                          "Too big number for operating"),
-
-                arguments("/calculator/all",
-                          "number",
-                          Optional.of(""),
-                          HttpStatus.BAD_REQUEST,
-                          "Input numbers have wrong format")
-                        );
     }
 }

@@ -18,7 +18,7 @@ import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "calculator/log")  
+@RequestMapping(value = "calculator/log")
 @RequiredArgsConstructor
 public class LoggerCalculationController {
 
